@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: gradlew 실행 권한 설정
-        run: ./gradlew bootBuildImage --imageName jeong1230/hello:latest
-      
+        run: chmod +x gradlew
+        
       - name: 소스파일을 docker이미지로 빌드한다
-        run: docker build -t ${{env.USERNAME}}/hello:latest .
+        run: ./gradlew bootBuildImage --imageName ${{env.USERNAME}}/hello:latest
 
       - name: docker hub에 로그인을 한다
         run: docker login -u ${{env.USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }}
